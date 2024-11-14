@@ -1,0 +1,33 @@
+<mujoco model="bathtub_with_human">
+    <compiler angle="radian"/> <!-- use radians to define angles -->
+    <default>
+        <default class="collision">
+            <geom contype="1" conaffinity="1" group="4"/>
+        </default>
+        <default class="visual">
+            <geom contype="0" conaffinity="0" group="1" mass="0"/>
+        </default>
+        <geom type="mesh" quat="0.7071068 0.7071068 0 0"/>
+        <joint type="hinge" limited="true" axis="0 0 0" damping="0.1"/>
+        <position ctrllimited="true" kp="1"/>
+    </default>
+    <asset>
+        <mesh name="bathtub_body" file="bathtub_body.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="human_body" file="human_body.stl" scale="0.001 0.001 0.001"/>
+    </asset>
+    <worldbody>
+        <body name="bathtub">
+            <geom class="collision" mesh="bathtub_body"/>
+            <geom class="visual" mesh="bathtub_body"/>
+            <body name="human">
+                <geom class="collision" mesh="human_body" pos="0 0 0"/> <!-- تعديل الموضع حسب الحاجة -->
+                <geom class="visual" mesh="human_body" pos="0 0 0" rgba="1 1 1 1" /> <!-- تعديل الموضع حسب الحاجة -->
+            </body>
+        </body>
+    </worldbody>
+
+
+    <contact>
+        <exclude body1="bathtub" body2="human"/>
+    </contact>
+</mujoco>
